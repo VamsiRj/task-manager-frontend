@@ -109,3 +109,9 @@ button.sign-log-btn {
   border: 1px solid #f5c6cb;
   border-radius: 5px;
 }
+
+.form-field select {
+  width: fit-content;
+  outline: none;
+  border: solid 1px #ccc;
+}

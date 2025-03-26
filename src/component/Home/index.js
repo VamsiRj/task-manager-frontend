@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 function Home() {
+  console.log('home');
   const { userId, name, role } = useUserDetails();
   const navigate = useNavigate();
 

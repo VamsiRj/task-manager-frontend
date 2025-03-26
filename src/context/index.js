@@ -6,7 +6,7 @@ const UserContext = createContext({
   name: '',
   role: '',
   setId: () => {},
-  setName: () => {},
+  // setName: () => {},
   setRole: () => {},
 });
 
