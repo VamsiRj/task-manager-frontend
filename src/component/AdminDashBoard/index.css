@@ -30,6 +30,7 @@ body {
   background-color: #4caf50;
   color: white;
   border-radius: 10px 10px 0 0;
+  position: relative;
 }
 
 .admin-dashboard-header h1 {
@@ -52,10 +53,39 @@ body {
   transition: transform 0.2s ease;
 }
 
+.logout-btn {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  color: rgb(8, 181, 8);
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .search-container {
+  position: relative;
   display: flex;
   justify-content: center;
   padding: 10px;
+}
+.create-task-btn {
+  position: absolute;
+  right: 20px;
+  top: 17px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  background-color: #388e3c;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  outline: none;
 }
 .search-container input {
   padding: 10px;

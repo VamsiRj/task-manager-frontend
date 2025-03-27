@@ -53,8 +53,8 @@ const Login = () => {
         setView(pageState[1]);
       } else {
         setView(pageState[2]);
-        console.log('something went wrong');
-        setErrmsg(data);
+        console.log(data.message);
+        setErrmsg(data.message);
       }
     } catch (er) {
       setView(pageState[2]);
