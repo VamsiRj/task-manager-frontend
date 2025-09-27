@@ -1,18 +1,61 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid'; // Import uuid to generate unique userId
+import axios from 'axios';
 import './index.css';
 
-function SignUp() {
-  // const [name, setName] = useState('');
+const SignUp = () => {
   const [role, setRole] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState({ isError: false, msg: null }); // Success or error message
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPw, setShowPw] = useState(false);
+
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+    confirmPassword: '',
+    role: '',
+    submit: '',
+  });
+
+  const [successMessage, setSuccessMessage] = useState('');
 
   const url = 'http://localhost:5185/api/users';
+
+  const validate = () => {
+    const newErrors = {
+      username: '',
+      password: '',
+      confirmPassword: '',
+      role: '',
+      submit: '',
+    };
+
+    if (username.trim().length < 3) {
+      newErrors.username = 'Username must be at least 3 characters long.';
+    }
+
+    if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters long.';
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match.';
+    }
+
+    if (!role) {
+      newErrors.role = 'Please select a role.';
+    }
+
+    setErrors(newErrors);
+    return Object.values(newErrors).every((val) => val === '');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setSuccessMessage('');
+    if (!validate()) return;
 
     const userData = {
       Role: role,
@@ -20,106 +63,130 @@ function SignUp() {
       Password: password,
     };
 
-    // Example API call to send user data
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
+      const response = await axios.post(url, userData, {
+        headers: { 'Content-Type': 'application/json' },
       });
 
-      const data = await response.text();
-      if (response.ok) {
-        console.log('User successfully signed up:', data);
-        setMessage({ isError: false, msg: data });
-      } else {
-        console.log('Something went wrong:', data);
-        setMessage({ isError: true, msg: data });
-      }
+      setSuccessMessage(response.data || 'User successfully signed up!');
+      setUsername('');
+      setPassword('');
+      setConfirmPassword('');
+      setRole('');
+      setErrors({
+        username: '',
+        password: '',
+        confirmPassword: '',
+        role: '',
+        submit: '',
+      });
     } catch (error) {
-      console.error('Error signing up:', error);
-      setMessage({ isError: true, msg: error.message });
+      const errorMsg = error.response?.data || 'An error occurred. Please try again.';
+      setErrors((prev) => ({ ...prev, submit: errorMsg }));
     }
-
-    // setName('');
-    setRole('');
-    setUsername('');
-    setPassword('');
   };
 
-  const { isError, msg } = message;
   return (
-    <div className='sign-up-page'>
-      <div className='sign-up-container'>
-        <Link to='/login'>
-          <button className='sign-log-btn'>Login</button>
-        </Link>
-        <h2>Sign Up</h2>
-        {msg && (
-          <div className={isError ? 'error-message' : 'success-message'}>
-            {msg}
-          </div>
-        )}
+    <div className='main-container'>
+      <div className='login-signup-wrapper'>
+        <div className='login-section'>
+          <h2>Signup</h2>
 
-        <form onSubmit={handleSubmit}>
-          {
-            //   <div className='form-field'>
-            //   <label htmlFor='name'>Name:</label>
-            //   <input
-            //     type='text'
-            //     id='name'
-            //     value={name}
-            //     onChange={(e) => setName(e.target.value)}
-            //     required
-            //   />
-            // </div>
-          }
+          {successMessage && (
+            <p className='success-message' id='signupMessage'>
+              {successMessage}
+            </p>
+          )}
+          {errors.submit && (
+            <p className='error-message' id='submitError'>
+              {errors.submit}
+            </p>
+          )}
 
-          <div className='form-field'>
-            <label htmlFor='username'>Username:</label>
-            <input
-              type='text'
-              id='username'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className='input-group'>
+              <label htmlFor='username'>Username</label>
+              <input
+                type='text'
+                id='username'
+                name='username'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              {errors.username && <p className='error-message'>{errors.username}</p>}
+            </div>
 
-          <div className='form-field'>
-            <label htmlFor='password'>Password:</label>
-            <input
-              type='password'
-              id='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+            <div className='input-group'>
+              <label htmlFor='password'>Password</label>
+              <input
+                type={showPw ? 'text' : 'password'}
+                id='password'
+                name='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              {errors.password && <p className='error-message'>{errors.password}</p>}
+            </div>
 
-          <div className='form-field'>
-            <label htmlFor='role'>Role:</label>
-            <select
-              id='role'
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              required
-            >
-              <option value='' disabled>
-                Select your role
-              </option>
-              <option value='Admin'>Admin</option>
-              <option value='TeamMember'>TeamMember</option>
-            </select>
-          </div>
+            <div className='input-group'>
+              <label htmlFor='confirmPassword'>Confirm Password</label>
+              <input
+                type={showPw ? 'text' : 'password'}
+                id='confirmPassword'
+                name='confirmPassword'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              {errors.confirmPassword && <p className='error-message'>{errors.confirmPassword}</p>}
+            </div>
 
-          <button type='submit'>Sign Up</button>
-        </form>
+            <div className='input-group show-password'>
+              <input
+                checked={showPw}
+                onChange={(e) => setShowPw(e.target.checked)}
+                type='checkbox'
+                id='showPassword'
+              />
+              <label htmlFor='showPassword'>Show Password</label>
+            </div>
+
+            <div className='input-group'>
+              <label htmlFor='role'>Role</label>
+              <select
+                id='role'
+                name='role'
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                required
+              >
+                <option value='' disabled>
+                  Select Role
+                </option>
+                <option value='Admin'>Admin</option>
+                <option value='TeamMember'>TeamMember</option>
+              </select>
+              {errors.role && <p className='error-message'>{errors.role}</p>}
+            </div>
+
+            <button type='submit' className='login-button'>
+              Signup
+            </button>
+          </form>
+        </div>
+
+        <div className='signup-section'>
+          <h2>Already have an account?</h2>
+          <p>Login and manage your tasks efficiently.</p>
+          <Link to='/login' className='signup-link'>
+            <button className='signup-button'>Login</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default SignUp;

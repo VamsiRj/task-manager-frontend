@@ -1,0 +1,68 @@
+.confirm-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 350px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+ 
+  .confirm-box p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+ 
+  .confirm-box textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    outline: none;
+  }
+ 
+  .confirm-box textarea:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.4);
+  }
+ 
+  .confirm-box button {
+    flex: 1;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+ 
+  .confirm-box button:first-of-type {
+    background-color: #4caf50;
+  }
+ 
+  .confirm-box button:first-of-type:hover {
+    background-color: #3f9142;
+  }
+ 
+  .confirm-box button:last-of-type {
+    background-color: #f44336;
+  }
+ 
+  .confirm-box button:last-of-type:hover {
+    background-color: #d32f2f;
+  }
+ 
+ 

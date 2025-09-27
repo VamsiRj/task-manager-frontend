@@ -1,107 +1,104 @@
-/* General container styles */
 .main-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #f1f5f9;
 }
-.login-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+ 
+.login-signup-wrapper {
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  width: 800px;
+  max-width: 95%;
 }
-
-/* Header styles */
-.login-container h2 {
+ 
+.login-section, .signup-section {
+  padding: 40px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+ 
+.login-section {
+  background-color: #ffffff;
+}
+ 
+.signup-section {
+  background-color: #f0f9ff;
   text-align: center;
-  color: #333;
-  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
-/* Form styles */
-form {
+ 
+h2 {
+  margin-bottom: 24px;
+  color: #111827;
+}
+ 
+.input-group {
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
 }
-
-/* Input group styling */
-.input-group {
-  margin-bottom: 15px;
+ 
+label {
+  margin-bottom: 4px;
+  color: #374151;
+  font-weight: 500;
 }
-
-.input-group label {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-.input-group input {
-  width: 100%;
+ 
+input[type='text'],
+input[type='password'] {
   padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
   font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
-
-#showPassword {
-  width: fit-content;
-}
-
-/* Show password checkbox styling */
+ 
 .show-password {
-  display: flex;
-  justify-content: start;
+  flex-direction: row;
   align-items: center;
-  margin-bottom: 20px;
+  gap: 8px;
 }
-
-.show-password input {
-  margin-right: 5px;
+ 
+.login-button, .signup-button {
+  padding: 12px;
+  margin-top: 16px;
+  width: 100%;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
 }
-
-.show-password label {
-  font-size: 14px;
-  color: #555;
+ 
+.login-button:hover, .signup-button:hover {
+  background-color: #2563eb;
 }
-
-/* Error message styling */
-.error-message {
-  color: #f44336;
-  font-size: 14px;
-  text-align: center;
-  margin: 3px;
-  /* display: none; */
-}
-
+ 
 .loader-container {
   display: flex;
   justify-content: center;
+  margin: 10px 0;
 }
-
-/* Login button styling */
-.login-button {
-  padding: 12px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #4caf50;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+ 
+.error-message {
+  color: red;
+  margin-top: 10px;
 }
-
-.login-button:hover {
-  background-color: #45a049;
+ 
+.signup-link {
+  margin-top: 20px;
+  display: block;
 }
-
-/* Responsive styles */
-@media (max-width: 480px) {
-  .login-container {
-    padding: 15px;
-    width: 90%;
-  }
-}
+ 
+ 
