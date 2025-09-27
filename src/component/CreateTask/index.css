@@ -1,55 +1,110 @@
+/* Main Container */
 .create-task-container {
-  font-family: Arial, sans-serif;
-  background-color: #f0fff0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0ffe0, #ccf6e0);
   display: flex;
-  height: 100vh;
   justify-content: center;
   align-items: center;
+  height: 100vh;
   margin: 0;
-  width: 100%;
+  padding: 10px;
 }
-
+ 
+/* Form Card */
 .task-container {
-  background-color: #ffffff;
-  border: 2px solid #4caf50; /* Green border */
-  border-radius: 12px;
-  padding: 30px;
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 30px 30px 30px;
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 15px rgba(0, 128, 0, 0.2);
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 150, 100, 0.3);
+  transition: transform 0.3s ease;
 }
-
+ 
+.task-container:hover {
+  transform: scale(1.01);
+}
+ 
+/* Header */
 h2 {
   text-align: center;
-  color: #4caf50;
-  margin-bottom: 20px;
+  color: #2e7d32;
+  margin-bottom: 25px;
+  font-size: 26px;
 }
-
+ 
+/* Form Inputs */
 .task-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
-
+ 
 .task-form input,
-.task-form textarea {
+.task-form textarea,
+.task-form select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #4caf50;
-  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1.5px solid #a5d6a7;
+  border-radius: 10px;
   outline: none;
+  font-size: 14px;
+  background-color: #f9fff9;
+  transition: border 0.3s ease;
 }
-
-.task-form button {
-  background-color: #4caf50;
+ 
+.task-form input:focus,
+.task-form textarea:focus,
+.task-form select:focus {
+  border-color: #66bb6a;
+}
+ 
+/* Create Task Button */
+.task-form button[type='submit'] {
+  background: linear-gradient(to right, #43a047, #66bb6a);
   color: #fff;
   border: none;
   border-radius: 8px;
   padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
-
-.task-form button:hover {
-  background-color: #45a049;
+ 
+.task-form button[type='submit']:hover {
+  background: linear-gradient(to right, #388e3c, #43a047);
+  transform: translateY(-1px);
 }
+ 
+/* Go Back Button */
+.go-back-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #ef5350;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+ 
+.go-back-btn:hover {
+  background: #e53935;
+  transform: scale(1.03);
+}
+ 
+/* Message Paragraph */
+.task-form p {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #2e7d32;
+}
+ 
+ 
